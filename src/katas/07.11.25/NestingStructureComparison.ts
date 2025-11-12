@@ -1,0 +1,50 @@
+/**
+ *Complete the function/method (depending on the language) to return true/True when its argument is an array that has the same nesting structures and same corresponding length of nested arrays as the first array.
+ *
+ *For example:
+ *
+ * should return true
+ *[ 1, 1, 1 ].sameStructureAs( [ 2, 2, 2 ] );
+ *[ 1, [ 1, 1 ] ].sameStructureAs( [ 2, [ 2, 2 ] ] );
+ *
+ * should return false
+ *[ 1, [ 1, 1 ] ].sameStructureAs( [ [ 2, 2 ], 2 ] );
+ *[ 1, [ 1, 1 ] ].sameStructureAs( [ [ 2 ], 2 ] );
+ *
+ * should return true
+ *[ [ [ ], [ ] ] ].sameStructureAs( [ [ [ ], [ ] ] ] );
+ *
+ * should return false
+ *[ [ [ ], [ ] ] ].sameStructureAs( [ [ 1, 1 ] ] );
+ *For your convenience, there is already a function 'isArray(o)' declared and defined that returns true if its argument is an array, false otherwise.
+ */
+
+interface Array<T> {
+  sameStructureAs(other: unknown): boolean;
+}
+declare function isArray(o: unknown): o is unknown[];
+Array.prototype.sameStructureAs = function (other: unknown): boolean {
+  if (!isArray(other)) {
+    return false;
+  }
+  if (this.length !== other.length) {
+    return false;
+  }
+  for (let i = 0; i < this.length; i++) {
+    const thisElem = this[i];
+    const otherElem = other[i];
+    if (isArray(thisElem)) {
+      if (!isArray(otherElem)) {
+        return false;
+      }
+      if (!thisElem.sameStructureAs(otherElem)) {
+        return false;
+      }
+    } else {
+      if (isArray(otherElem)) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
