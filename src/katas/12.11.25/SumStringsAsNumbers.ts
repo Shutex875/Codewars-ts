@@ -1,14 +1,14 @@
 /**
-* Given the string representations of two integers, return the string representation of the sum of those integers.
-* For example:
-* sumStrings('1','2') // => '3'
-* A string representation of an integer will contain no characters besides the ten numerals "0" to "9".
-* I have removed the use of BigInteger and BigDecimal in java
-* Python: your solution need to work with huge numbers (about a milion digits), converting to int will not work.
-*/
+ * Given the string representations of two integers, return the string representation of the sum of those integers.
+ * For example:
+ * sumStrings('1','2') // => '3'
+ * A string representation of an integer will contain no characters besides the ten numerals "0" to "9".
+ * I have removed the use of BigInteger and BigDecimal in java
+ * Python: your solution need to work with huge numbers (about a milion digits), converting to int will not work.
+ */
 function sumStrings(a: string, b: string): string {
-  const clA = a.replace(/^0+/, '');
-  const clB = b.replace(/^0+/, '');
+  const clA = a.replace(/^0+/, "");
+  const clB = b.replace(/^0+/, "");
   if (!clA) return clB;
   if (!clB) return clA;
   const result: number[] = [];
@@ -21,7 +21,8 @@ function sumStrings(a: string, b: string): string {
     const sum = digitA + digitB + carry;
     result.push(sum % 10);
     carry = Math.floor(sum / 10);
-    iA--; iB--;
+    iA--;
+    iB--;
   }
-  return result.reverse().join('');
+  return result.reverse().join("");
 }
